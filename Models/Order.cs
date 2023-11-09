@@ -1,4 +1,4 @@
-namespace Models
+namespace Aishopping.Models
 {
     public class Order
     {
