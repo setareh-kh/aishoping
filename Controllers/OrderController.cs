@@ -1,4 +1,5 @@
 using Aishopping.Models;
+using Aishopping.Repositories;
 using Aishopping.Repositories.Repositories;
 using DTos.Requests;
 using Microsoft.AspNetCore.Mvc;
@@ -9,8 +10,8 @@ namespace Controllers
     [Route("api/[controller]")]
     public class OrderController : ControllerBase
     {
-        private readonly OrderRepository _orderRepository;
-        public OrderController(OrderRepository orderRepository)
+        private readonly IOrderRepository _orderRepository;
+        public OrderController(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
         }

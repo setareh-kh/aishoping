@@ -1,5 +1,6 @@
 using Aishopping.DTos.Requests;
 using Aishopping.Models;
+using Aishopping.Repositories;
 using Aishopping.Repositories.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,8 +10,8 @@ namespace Controllers
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
-        private readonly ProductRepository _productRepository;
-        public ProductController(ProductRepository productRepository)
+        private readonly IProductRepository _productRepository;
+        public ProductController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }

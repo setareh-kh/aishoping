@@ -1,5 +1,6 @@
 using Aishopping.DTos.Requests;
 using Aishopping.Models;
+using Aishopping.Repositories;
 using Aishopping.Repositories.Repositories;
 using DTos.Requests;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +12,8 @@ namespace Controllers
     public class UserController : ControllerBase
     {
 
-        private readonly UserRepository _userRepository;
-        public UserController(UserRepository userRepository)
+        private readonly IUserRepository _userRepository;
+        public UserController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
