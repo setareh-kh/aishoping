@@ -69,7 +69,7 @@ namespace Aishopping.Repositories.Repositories
                 return false;
             }
         }
-        public async Task<bool> Login(LoginUser loginUser)
+        public async Task<bool> LoginAsync(LoginUser loginUser)
         {
             User? user = await _appDbContext.Users.FirstOrDefaultAsync(u => u.FirstName ==loginUser.FirstName  && u.Password==loginUser.Password );
             return user!=null;
