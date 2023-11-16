@@ -23,6 +23,13 @@ namespace Controllers
             return Ok(orders == null ? "No Any Order" : orders);
         }
         [HttpGet]
+        [Route("GetAllOrderWithUser")]
+        public async Task<IActionResult> GetAllOrderUserAsync()
+        {
+            List<Order>? orders = await _orderRepository.GetOrderUserAsync();
+            return Ok(orders == null ? "No Any Order" : orders);
+        }
+        [HttpGet]
         [Route("GetById/{id}")]
         public async Task<IActionResult> GetorderAsync(int id)
         {

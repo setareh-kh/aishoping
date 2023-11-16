@@ -61,5 +61,10 @@ namespace Aishopping.Repositories.Repositories
                 return false;
 
         }
+        public async Task<List<Order>?> GetOrderUserAsync()
+        {
+            var result = await _appDbContext.Orders.Include(order=> order.User).ToListAsync();
+            return result ?? null;
+        }
     }
 }
