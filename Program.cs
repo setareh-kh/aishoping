@@ -2,7 +2,6 @@ using Aishopping.Models;
 using Aishopping.Repositories;
 using Aishopping.Repositories.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +11,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 var myConnectionString=builder.Configuration.GetConnectionString("MyConnection");
 builder.Services.AddDbContext<AppDbContext>(Options => Options.UseMySql(myConnectionString,ServerVersion.AutoDetect(myConnectionString)));
 builder.Services.AddScoped<IUserRepository,UserRepository>();

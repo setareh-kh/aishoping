@@ -41,3 +41,8 @@ E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\Mono.TextTemplat
 E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\MySqlConnector.dll
 E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\Pomelo.EntityFrameworkCore.MySql.dll
 E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\System.CodeDom.dll
+E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\Newtonsoft.Json.dll
+E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\Swashbuckle.AspNetCore.Newtonsoft.dll
