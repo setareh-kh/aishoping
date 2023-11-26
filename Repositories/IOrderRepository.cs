@@ -1,5 +1,5 @@
 using Aishopping.Models;
-using DTos.Requests;
+using Aishopping.DTos.Requests;
 namespace Aishopping.Repositories
 {
     public interface IOrderRepository

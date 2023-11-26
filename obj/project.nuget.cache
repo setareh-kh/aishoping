@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "CqjGjcSAEtoTR4QxW59fSKAOfmdAPX2wkD3wC1wZPYsyCezkO4Tym7mNo6Wi6FCJOFCbzaJmMJzEhkUgbS6R2Q==",
+  "dgSpecHash": "b4EtfMmW95ntxJQiTbwq1ULO+d5TcMxzkB9PXRTvyZ+Kf8cpbhtaT0gmjE8f5knlCllohHNu7MvEuzQ2O+sX3Q==",
   "success": true,
   "projectFilePath": "E:\\Backend_class\\Githubrepositories\\Aishopping\\Aishopping.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Star\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\Star\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\Star\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Star\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\7.0.0\\microsoft.aspnetcore.jsonpatch.7.0.0.nupkg.sha512",
     "C:\\Users\\Star\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\7.0.0\\microsoft.aspnetcore.mvc.newtonsoftjson.7.0.0.nupkg.sha512",

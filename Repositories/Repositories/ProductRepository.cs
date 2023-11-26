@@ -1,14 +1,17 @@
 using Aishopping.DTos.Requests;
 using Aishopping.Models;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 namespace Aishopping.Repositories.Repositories
 {
     public class ProductRepository : IProductRepository
     {
         private readonly AppDbContext _appDbContext;
-        public ProductRepository(AppDbContext appDbContext)
+        private IMapper _mapper;
+        public ProductRepository(AppDbContext appDbContext,IMapper mapper)
         {
             _appDbContext = appDbContext;
+            _mapper=mapper;
         }
         public async Task<Product?> GetProductAsync(int id)
         {
@@ -23,22 +26,18 @@ namespace Aishopping.Repositories.Repositories
         }
         public async Task<Product> CreateProductAsync(AddProduct addProduct)
         {
-            Product newUser = new()
-            {
-                Name = addProduct.Name,
-                Price = addProduct.Price
-            };
-            await _appDbContext.Products.AddAsync(newUser);
+            var newProduct = _mapper.Map<Product>(addProduct);
+            
+            await _appDbContext.Products.AddAsync(newProduct);
             await _appDbContext.SaveChangesAsync();
-            return newUser;
+            return newProduct;
         }
         public async Task<bool> UpdateProductAsync(int id, UpdateProduct updateProduct)
         {
             var existingProduct = await _appDbContext.Products.FindAsync(id);
             if (existingProduct != null)
             {
-                existingProduct.Name = updateProduct.Name;
-                existingProduct.Price = updateProduct.Price;
+                _mapper.Map(updateProduct,existingProduct);
                 await _appDbContext.SaveChangesAsync();
                 return true;
             }

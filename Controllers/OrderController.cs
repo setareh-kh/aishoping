@@ -1,7 +1,6 @@
 using Aishopping.Models;
 using Aishopping.Repositories;
-using Aishopping.Repositories.Repositories;
-using DTos.Requests;
+using Aishopping.DTos.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Controllers

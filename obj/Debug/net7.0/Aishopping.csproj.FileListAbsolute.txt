@@ -46,3 +46,5 @@ E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\Microsoft.AspNet
 E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\Newtonsoft.Json.dll
 E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
 E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\Swashbuckle.AspNetCore.Newtonsoft.dll
+E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\AutoMapper.dll
+E:\Backend_class\Githubrepositories\Aishopping\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

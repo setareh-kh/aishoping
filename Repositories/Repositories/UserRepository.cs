@@ -1,6 +1,6 @@
 using Aishopping.DTos.Requests;
 using Aishopping.Models;
-using DTos.Requests;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace Aishopping.Repositories.Repositories
@@ -8,9 +8,11 @@ namespace Aishopping.Repositories.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly AppDbContext _appDbContext;
-        public UserRepository(AppDbContext appDbContext)
+        private IMapper _mapper;
+        public UserRepository(AppDbContext appDbContext,IMapper mapper)
         {
             _appDbContext = appDbContext;
+            _mapper=mapper;
         }
         public async Task<User?> GetUserAsync(int id)
         {
@@ -25,13 +27,7 @@ namespace Aishopping.Repositories.Repositories
         }
         public async Task<User> CreateUserAsync(AddUser addUser)
         {
-            var newUser = new User
-            {
-                FirstName = addUser.FirstName,
-                LastName = addUser.LastName,
-                Email = addUser.Email,
-                Password = addUser.Password
-            };
+            var newUser=_mapper.Map<User>(addUser);
             await _appDbContext.Users.AddAsync(newUser);
             await _appDbContext.SaveChangesAsync();
             return newUser;
@@ -42,10 +38,7 @@ namespace Aishopping.Repositories.Repositories
             var userToBeUpdated = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
             if (userToBeUpdated != null)
             {
-                userToBeUpdated.FirstName = updateUser.FirstName;
-                userToBeUpdated.LastName = updateUser.LastName;
-                userToBeUpdated.Email = updateUser.Email;
-                userToBeUpdated.Password = updateUser.Password;
+                _mapper.Map(updateUser,userToBeUpdated);
                 await _appDbContext.SaveChangesAsync();
                 return true;
             }

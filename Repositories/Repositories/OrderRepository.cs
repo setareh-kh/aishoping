@@ -1,14 +1,17 @@
 using Aishopping.Models;
-using DTos.Requests;
+using AutoMapper;
+using Aishopping.DTos.Requests;
 using Microsoft.EntityFrameworkCore;
 namespace Aishopping.Repositories.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
         private readonly AppDbContext _appDbContext;
-        public OrderRepository(AppDbContext appDbContext)
+        private IMapper _mapper;
+        public OrderRepository(AppDbContext appDbContext,IMapper mapper)
         {
             _appDbContext = appDbContext;
+            _mapper=mapper;
         }
         public async Task<Order?> GetOrderAsync(int id)
         {
@@ -23,14 +26,8 @@ namespace Aishopping.Repositories.Repositories
         }
         public async Task<Order> CreateOrderAsync(AddOrder addOrder)
         {
-            Order order = new()
-            {
-                ProductId = addOrder.ProductId,
-                UserId = addOrder.UserId,
-                Quantity = addOrder.Quantity,
-                OrderDate = DateTime.Now
-
-            };
+            var order=_mapper.Map<Order>(addOrder);
+            order.OrderDate = DateTime.Now;
             await _appDbContext.Orders.AddAsync(order);
             await _appDbContext.SaveChangesAsync();
             return order;
@@ -40,7 +37,7 @@ namespace Aishopping.Repositories.Repositories
             var Order = await _appDbContext.Orders.FirstOrDefaultAsync(x => x.Id == id);
             if (Order != null)
             {
-                Order.Quantity = updateOrder.Quantity;
+                _mapper.Map(updateOrder, Order);
                 await _appDbContext.SaveChangesAsync();
                 return true;
             }

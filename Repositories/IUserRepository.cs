@@ -1,6 +1,5 @@
 using Aishopping.DTos.Requests;
 using Aishopping.Models;
-using DTos.Requests;
 namespace Aishopping.Repositories
 {
     public interface IUserRepository

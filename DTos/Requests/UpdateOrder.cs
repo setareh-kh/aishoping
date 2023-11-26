@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DTos.Requests
+namespace Aishopping.DTos.Requests
 {
     public class UpdateOrder
     {
