@@ -18,21 +18,21 @@ namespace Controllers
         [Route("GetAll")]
         public async Task<IActionResult> GetAllAsync()
         {
-            List<Order>? orders = await _orderRepository.GetOrdersAsync();
+            var orders = await _orderRepository.GetOrdersAsync();
             return Ok(orders == null ? "No Any Order" : orders);
         }
         [HttpGet]
         [Route("GetAllOrderWithUser")]
         public async Task<IActionResult> GetAllOrderUserAsync()
         {
-            List<Order>? orders = await _orderRepository.GetOrderUserAsync();
+            var orders = await _orderRepository.GetOrderUserAsync();
             return Ok(orders == null ? "No Any Order" : orders);
         }
         [HttpGet]
         [Route("GetById/{id}")]
         public async Task<IActionResult> GetorderAsync(int id)
         {
-            Order? order = await _orderRepository.GetOrderAsync(id);
+            var order = await _orderRepository.GetOrderAsync(id);
             return Ok(order == null ? "no order with this Id" : order);
         }
         [HttpPost]

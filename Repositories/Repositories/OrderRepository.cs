@@ -2,6 +2,7 @@ using Aishopping.Models;
 using AutoMapper;
 using Aishopping.DTos.Requests;
 using Microsoft.EntityFrameworkCore;
+using Aishopping.DTos.Responses;
 namespace Aishopping.Repositories.Repositories
 {
     public class OrderRepository : IOrderRepository
@@ -13,24 +14,27 @@ namespace Aishopping.Repositories.Repositories
             _appDbContext = appDbContext;
             _mapper=mapper;
         }
-        public async Task<Order?> GetOrderAsync(int id)
+        public async Task<OrderResponseDto?> GetOrderAsync(int id)
         {
-            Order? Order = await _appDbContext.Orders.FindAsync(id);
-            return Order ?? null;
+            Order? order = await _appDbContext.Orders.FindAsync(id);
+            var response= _mapper.Map<OrderResponseDto>(order);
+            return response ?? null;
         }
 
-        public async Task<List<Order>?> GetOrdersAsync()
+        public async Task<List<OrderResponseDto>?> GetOrdersAsync()
         {
             List<Order>? orders = await _appDbContext.Orders.ToListAsync();
-            return orders.Count > 0 ? orders : null;
+            var responses= orders.Select(o=>_mapper.Map<OrderResponseDto>(o)).ToList();
+            return responses.Count > 0 ? responses : null;
         }
-        public async Task<Order> CreateOrderAsync(AddOrder addOrder)
+        public async Task<OrderResponseDto> CreateOrderAsync(AddOrder addOrder)
         {
             var order=_mapper.Map<Order>(addOrder);
             order.OrderDate = DateTime.Now;
             await _appDbContext.Orders.AddAsync(order);
             await _appDbContext.SaveChangesAsync();
-            return order;
+            var response= _mapper.Map<OrderResponseDto>(order);
+            return response;
         }
         public async Task<bool> UpdateOrderAsync(int id, UpdateOrder updateOrder)
         {
@@ -58,10 +62,11 @@ namespace Aishopping.Repositories.Repositories
                 return false;
 
         }
-        public async Task<List<Order>?> GetOrderUserAsync()
+        public async Task<List<OrderResponseDto>?> GetOrderUserAsync()
         {
             var result = await _appDbContext.Orders.Include(order=> order.User).ToListAsync();
-            return result ?? null;
+            var responses= result.Select(o=>_mapper.Map<OrderResponseDto>(o)).ToList();
+            return responses ?? null;
         }
     }
 }

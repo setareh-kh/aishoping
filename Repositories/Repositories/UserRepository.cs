@@ -1,4 +1,5 @@
 using Aishopping.DTos.Requests;
+using Aishopping.DTos.Responses;
 using Aishopping.Models;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -14,23 +15,26 @@ namespace Aishopping.Repositories.Repositories
             _appDbContext = appDbContext;
             _mapper=mapper;
         }
-        public async Task<User?> GetUserAsync(int id)
+        public async Task<UserResponseDto?> GetUserAsync(int id)
         {
             User? user = await _appDbContext.Users.FindAsync(id);
-            return user ?? null;
+            var Response=_mapper.Map<UserResponseDto>(user);
+            return Response?? null;
         }
 
-        public async Task<List<User>?> GetUsersAsync()
+        public async Task<List<UserResponseDto>?> GetUsersAsync()
         {
             List<User> users = await _appDbContext.Users.ToListAsync();
-            return users.Count > 0 ? users : null;
+            var Response=users.Select(u=>_mapper.Map<UserResponseDto>(u)).ToList();
+            return Response.Count > 0 ? Response : null;
         }
-        public async Task<User> CreateUserAsync(AddUser addUser)
+        public async Task<UserResponseDto> CreateUserAsync(AddUser addUser)
         {
             var newUser=_mapper.Map<User>(addUser);
             await _appDbContext.Users.AddAsync(newUser);
             await _appDbContext.SaveChangesAsync();
-            return newUser;
+            var Response=_mapper.Map<UserResponseDto>(newUser);
+            return Response;
 
         }
         public async Task<bool> UpdateUserAsync(int id, UpdateUser updateUser)

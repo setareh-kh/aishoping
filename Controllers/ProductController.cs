@@ -19,14 +19,14 @@ namespace Controllers
         [Route("GetAll")]
         public async Task<IActionResult> GetAllAsync()
         {
-            List<Product>? Products = await _productRepository.GetProductsAsync();
+            var Products = await _productRepository.GetProductsAsync();
             return Ok(Products == null ? "No Any Product" : Products);
         }
         [HttpGet]
         [Route("GetById/{id}")]
         public async Task<IActionResult> GetProductAsync(int id)
         {
-            Product? product = await _productRepository.GetProductAsync(id);
+            var product = await _productRepository.GetProductAsync(id);
             return Ok(product == null ? "no Product with this Id" : product);
         }
         [HttpPost]

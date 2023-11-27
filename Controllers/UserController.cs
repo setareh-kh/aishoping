@@ -19,14 +19,14 @@ namespace Controllers
         [Route("GetAll")]
         public async Task<IActionResult> GetAllAsync()
         {
-            List<User>? users = await _userRepository.GetUsersAsync();
+            var users = await _userRepository.GetUsersAsync();
             return Ok(users == null ? "No Any User" : users);
         }
         [HttpGet]
         [Route("GetById/{id}")]
         public async Task<IActionResult> GetUserAsync(int id)
         {
-            User? user = await _userRepository.GetUserAsync(id);
+            var user = await _userRepository.GetUserAsync(id);
             return Ok(user == null ? "no user with this Id" : user);
         }
         [HttpPost]

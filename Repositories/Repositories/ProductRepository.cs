@@ -1,4 +1,5 @@
 using Aishopping.DTos.Requests;
+using Aishopping.DTos.Responses;
 using Aishopping.Models;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -13,24 +14,26 @@ namespace Aishopping.Repositories.Repositories
             _appDbContext = appDbContext;
             _mapper=mapper;
         }
-        public async Task<Product?> GetProductAsync(int id)
+        public async Task<ProductResponseDto?> GetProductAsync(int id)
         {
             Product? product = await _appDbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
-            return product ?? null;
+            var response= _mapper.Map<ProductResponseDto>(product);
+            return response ?? null;
         }
 
-        public async Task<List<Product>?> GetProductsAsync()
+        public async Task<List<ProductResponseDto>?> GetProductsAsync()
         {
             List<Product> products = await _appDbContext.Products.ToListAsync();
-            return products.Count > 0 ? products : null;
+            var responses= products.Select(p=> _mapper.Map<ProductResponseDto>(p)).ToList();
+            return responses.Count > 0 ? responses : null;
         }
-        public async Task<Product> CreateProductAsync(AddProduct addProduct)
+        public async Task<ProductResponseDto> CreateProductAsync(AddProduct addProduct)
         {
             var newProduct = _mapper.Map<Product>(addProduct);
-            
             await _appDbContext.Products.AddAsync(newProduct);
             await _appDbContext.SaveChangesAsync();
-            return newProduct;
+            var response= _mapper.Map<ProductResponseDto>(newProduct); 
+            return response;
         }
         public async Task<bool> UpdateProductAsync(int id, UpdateProduct updateProduct)
         {
